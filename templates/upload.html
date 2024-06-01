@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Cartoonizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            background-color: #121121;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: whitesmoke;
+        }
+        .upload-form {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 400px;
+            background-color: rgb(51, 51, 51);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; 
+        }
+        .upload-icon {
+            display: block;
+            font-size: 48px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .custom-file-upload:hover {
+            background-color: #0056b3;
+        }
+        #selected-file {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #ccc;
+        }
+        .loader {
+            position: absolute; 
+            top: 100%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
+            display: none;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload an Image</h1>
+    <div class="upload-form">
+        <form method="POST" enctype="multipart/form-data" onsubmit="showLoader()">
+            <label for="file-upload" class="upload-icon">&#x21ea;</label>
+            <input id="file-upload" type="file" name="file" accept=".jpg, .jpeg, .png" onchange="updateFileName(this)">
+            <label for="file-upload" class="custom-file-upload">Choose File</label>
+            <input type="submit" value="Upload" class="custom-file-upload" style="border: none;">
+            <div class="loader" id="loader"></div>
+            <div id="selected-file"></div>
+        </form>
+    </div>
+
+    <script>
+        function updateFileName(input) {
+            var fileName = input.files[0].name;
+            document.getElementById('selected-file').textContent = 'Selected File: ' + fileName;
+        }
+
+        function showLoader() {
+            var loader = document.getElementById('loader');
+            loader.style.display = 'inline-block';
+            return true;
+        }
+    </script>
+</body>
+</html>
